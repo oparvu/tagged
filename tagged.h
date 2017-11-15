@@ -18,7 +18,14 @@ namespace tagged_type {
 		tagged(tagged<from_type, tag>& tag) : _value(tag.value()) {}
 
 		template<typename from_type, typename = std::enable_if_t<std::is_constructible_v<T, from_type&&>>>
-		tagged(tagged<from_type, tag>&& tag) : _value(std::move(tag.value())) {}
+		tagged(tagged<from_type, tag>&& tag) : _value(std::move(tag.value()))
+		{
+			static_assert(
+				!std::is_reference_v<T> ||
+				(std::is_reference_v<from_type> &&
+				 std::is_same_v<std::decay_t<T>, std::decay_t<from_type>>)
+						, "Cannot take reference to temporary");
+		}
 
 		T const& value() const& { return _value; }
 		T& value() & { return _value; }

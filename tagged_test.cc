@@ -35,9 +35,9 @@ void test()
 //	take_by_ref(tagged_type::as_ref<meter>(5)); // should not work
 	take_by_cref(distance);
 	take_by_cref(tagged_type::as_ref<meter>(dvalue));
-	take_by_cref(tagged_type::as_ref<meter>(ivalue));
-	take_by_cref(tagged_type::as<meter>(5));
-	take_by_cref(tagged_type::as_ref<meter>(5));
+//	take_by_cref(tagged_type::as_cref<meter>(ivalue));
+//	take_by_cref(tagged_type::as<meter>(5));
+//	take_by_cref(tagged_type::as_ref<meter>(5));
 
 	{
 		meter m;
